@@ -1,8 +1,8 @@
 from setuptools import setup
 
 setup(
-    name='orchard-client',
-    version='0.1.0',
+    name='orchard-python-client',
+    version='1.0.0',
     description='Python client for interacting with the Orchard orchestration API',
     author='Mor Dabastany',
     author_email='morpci@gmail.com',

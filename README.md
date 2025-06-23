@@ -1,11 +1,11 @@
-# 🍊 Orchard Client
+<img src=".readme/orchard-python-client.png" alt="cover" width="220">
 
 A lightweight Python client for interacting with the **Orchard Orchestration API**.  
 Supports full CRUD operations for service accounts, workers, and virtual machines — with payloads in either **JSON** or **YAML** format.
 
 ---
 
-## 📦 Installation
+## Installation
 
 ```bash 
 pip install git+https://github.com/your-username/orchard-client.git
@@ -21,7 +21,7 @@ pip install .
 
 ---
 
-## 🧰 Requirements
+## Requirements
 
 - Python 3.x
 - `requests`
@@ -31,7 +31,7 @@ These are automatically installed via `setup.py`.
 
 ---
 
-## ✨ Features
+## Features
 
 - HTTP Basic Auth support
 - Built-in methods for:
@@ -47,7 +47,7 @@ These are automatically installed via `setup.py`.
 
 ---
 
-## 🚀 Usage
+## Usage
 
 ```python
 from orchard_client import OrchardClient
@@ -69,7 +69,7 @@ print(workers)
 
 ---
 
-## 📄 Supported Methods
+## Supported Methods
 
 ### VMs
 - `create_vm(data)`
@@ -101,7 +101,7 @@ print(workers)
 
 ---
 
-## 📟 Example VM Config (YAML)
+## Example VM Config (YAML)
 
 ```yaml
 name: "test-vm"
@@ -115,13 +115,13 @@ network:
 
 ---
 
-## 🛡 License
+## License
 
 [MIT](LICENSE)
 
 ---
 
-## 👨‍💼 Author
+## Author
 
 **Mor Dabastany**  
 📧 morpci@gmail.com

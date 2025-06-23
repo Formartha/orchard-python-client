@@ -124,4 +124,5 @@ network:
 ## Author
 
 **Mor Dabastany**  
-📧 morpci@gmail.com
+📧 https://www.linkedin.com/in/dabastany/
+

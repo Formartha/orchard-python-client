@@ -1,0 +1,73 @@
+{
+  "name": "orchard-python-client",
+  "description": "A lightweight Python client for interacting with the Orchard Orchestration API. Supports full CRUD operations on service accounts, workers, and VMs, with payloads in JSON or YAML.",
+  "version": "1.0.0",
+  "author": "Mor Dabastany",
+  "license": "MIT",
+  "dependencies": ["requests", "PyYAML"],
+  "authentication": {
+    "type": "basic_auth",
+    "fields": {
+      "username": "user",
+      "password": "password"
+    }
+  },
+  "base_url": "{base_url}/v1",
+  "data_input_formats": ["dict", "json_file", "yaml_file", "json_string", "yaml_string"],
+  "methods": [
+    {
+      "name": "create_vm",
+      "method": "POST",
+      "endpoint": "/vms",
+      "description": "Create a virtual machine using flexible payload input (YAML, JSON, etc.)",
+      "body": { "type": "json", "source": "data" }
+    },
+    {
+      "name": "create_vm_and_return_ip",
+      "method": "POST",
+      "endpoint": "/vms",
+      "description": "Create a VM and retry fetching its IP address using polling logic",
+      "composed": true,
+      "params": { "retries": "int", "wait": "int" }
+    },
+    {
+      "name": "resolve_vm_ip",
+      "method": "GET",
+      "endpoint": "/vms/{name}/ip",
+      "description": "Resolve VM's IP address",
+      "params": { "wait": "int" }
+    },
+    { "name": "list_vms", "method": "GET", "endpoint": "/vms", "description": "List all virtual machines" },
+    { "name": "get_vm", "method": "GET", "endpoint": "/vms/{name}", "description": "Retrieve VM info" },
+    { "name": "update_vm", "method": "PUT", "endpoint": "/vms/{name}", "description": "Update VM config", "body": { "type": "json", "source": "data" }},
+    { "name": "delete_vm", "method": "DELETE", "endpoint": "/vms/{name}", "description": "Delete a VM" },
+    { "name": "get_vm_events", "method": "GET", "endpoint": "/vms/{name}/events", "description": "Fetch VM-related events" },
+    { "name": "add_vm_events", "method": "POST", "endpoint": "/vms/{name}/events", "description": "Add VM events", "body": { "type": "json", "source": "events" }},
+
+    { "name": "create_worker", "method": "POST", "endpoint": "/workers", "description": "Create a worker", "body": { "type": "json", "source": "data" }},
+    { "name": "list_workers", "method": "GET", "endpoint": "/workers", "description": "List all workers" },
+    { "name": "get_worker", "method": "GET", "endpoint": "/workers/{name}", "description": "Get a specific worker" },
+    { "name": "update_worker", "method": "PUT", "endpoint": "/workers/{name}", "description": "Update a worker", "body": { "type": "json", "source": "data" }},
+    { "name": "delete_worker", "method": "DELETE", "endpoint": "/workers/{name}", "description": "Delete a worker" },
+
+    { "name": "create_service_account", "method": "POST", "endpoint": "/service-accounts", "description": "Create a new service account", "body": { "type": "json", "source": "data" }},
+    { "name": "list_service_accounts", "method": "GET", "endpoint": "/service-accounts", "description": "List all service accounts" },
+    { "name": "get_service_account", "method": "GET", "endpoint": "/service-accounts/{name}", "description": "Get a service account by name" },
+    { "name": "update_service_account", "method": "PUT", "endpoint": "/service-accounts/{name}", "description": "Update a service account", "body": { "type": "json", "source": "data" }},
+    { "name": "delete_service_account", "method": "DELETE", "endpoint": "/service-accounts/{name}", "description": "Delete a service account" },
+
+    { "name": "get_controller_info", "method": "GET", "endpoint": "/controller/info", "description": "Fetch controller metadata" },
+    { "name": "get_cluster_settings", "method": "GET", "endpoint": "/cluster-settings", "description": "Get cluster settings" },
+    { "name": "update_cluster_settings", "method": "PUT", "endpoint": "/cluster-settings", "description": "Update cluster configuration", "body": { "type": "json", "source": "settings" }}
+  ],
+  "example_usage": [
+    {
+      "description": "Create a VM from a YAML file and print its IP",
+      "code": "client = OrchardClient(base_url='https://orchard.local:6120', user='admin', password='secret')\nvm_info = client.create_vm_and_return_ip('vm_config.yaml')\nprint(vm_info)"
+    },
+    {
+      "description": "List all service accounts",
+      "code": "accounts = client.list_service_accounts()\nprint(accounts)"
+    }
+  ]
+}
